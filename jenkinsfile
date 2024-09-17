@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git(
+                    url: 'https://github.com/Prathm0025/Slot-Vikings-dev.git',
+                    branch: 'dev-build'
+                )
+            }
+        }
+
+        stage('Git LFS Pull') {
+            steps {
+                sh """
+                    git lfs pull
+                    git add .
+                    ls
+                    git reset --hard
+                """
+            }
+        }
+    }
+}
+
